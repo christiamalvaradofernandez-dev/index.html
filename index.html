@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevRace // Carrera de Niveles HTML & CSS</title>
+    <style>
+        /* CSS: Estilo Gamer / Cyberpunk para Adolescentes */
+        :root {
+            --bg-pista: #0d0e15;
+            --bg-card: #181a26;
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff007f;
+            --neon-green: #39ff14;
+            --texto: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace; /* Toque de código */
+        }
+
+        body {
+            background-color: var(--bg-pista);
+            color: var(--texto);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub {
+            color: #8a8fbc;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        /* LA PISTA DE CARRERAS */
+        .pista-contenedor {
+            width: 100%;
+            max-width: 700px;
+            background: #111424;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .meta {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            bottom: 10px;
+            width: 15px;
+            background: linear-gradient(45deg, #fff 25%, #000 25%, #000 50%, #fff 50%, #fff 75%, #000 75%, #000 100%);
+            background-size: 10px 10px;
+            border-radius: 4px;
+        }
+
+        .carril {
+            height: 80px;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* El Auto / Nave del Jugador */
+        .auto-jugador {
+            font-size: 2.5rem;
+            position: absolute;
+            left: 5%; /* Esto cambiará con JS de 5% a 85% */
+            transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 0 8px var(--neon-cyan));
+        }
+
+        /* TARJETA DE CONOCIMIENTO (Panel de Control) */
+        .panel-control {
+            width: 100%;
+            max-width: 700px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .rango {
+            color: var(--neon-magenta);
+            text-shadow: 0 0 5px var(--neon-magenta);
+        }
+
+        .codigo-box {
+            background: #090a10;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--neon-green);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .tag { color: #ff79c6; }
+        .attr { color: #50fa7b; }
+        .val { color: #f1fa8c; }
+
+        .explicacion {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #c2c6e2;
+            margin-bottom: 20px;
+        }
+
+        /* Botón Nitro */
+        .btn-nitro {
+            background: linear-gradient(135deg, var(--neon-cyan), #0055ff);
+            color: #000;
+            font-weight: 900;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-nitro:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px var(--neon-cyan);
+            color: #fff;
+        }
+
+        .btn-nitro:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DEVRACE: SPEED CODE</h1>
+    <p class="sub">Domina HTML y CSS para acelerar tu nave al máximo</p>
+
+    <div class="pista-contenedor">
+        <div class="meta"></div>
+        <div class="carril">
+            <div class="auto-jugador" id="nave">🏎️💨</div>
+        </div>
+    </div>
+
+    <div class="panel-control">
+        <div class="status-bar">
+            <span>RANGO ACTUAL: <span class="rango" id="nombre-rango">Novato HTML</span></span>
+            <span style="color: var(--neon-cyan);" id="num-nivel">Nivel: 1 / 5</span>
+        </div>
+
+        <div class="codigo-box">
+            <code id="codigo-pantalla">
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"motor-nitro"</span><span class="tag">&gt;</span>⚡<span class="tag">&lt;/div&gt;</span>
+            </code>
+        </div>
+
+        <p class="explicacion" id="texto-explicacion">
+            ¡Arrancamos! El tag <code>&lt;div&gt;</code> crea la estructura básica de tu auto. Sin estructura, no hay velocidad. ¡Presiona NITRO para inyectar este código y avanzar!
+        </p>
+
+        <button class="btn-nitro" id="btn-accion" onclick="acelerarNave()">
+            ¡Inyectar Código! 🚀
+        </button>
+    </div>
+
+    <script>
+        let nivel = 1;
+
+        // Base de datos de la carrera de aprendizaje
+        const carreraData = {
+            1: {
+                rango: "Novato Estructural",
+                codigo: '<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"motor-nitro"</span><span class="tag">&gt;</span>⚡<span class="tag">&lt;/div&gt;</span>',
+                explicacion: "¡Arrancamos! El tag <code>&lt;div&gt;</code> crea la estructura básica de tu auto. Sin estructura, no hay velocidad. ¡Presiona NITRO para inyectar este código y avanzar!",
+                posicionNave: "10%"
+            },
+            2: {
+                rango: "Piloto de Estilos (CSS)",
+                codigo: '<span class="tag">.auto</span> { <span class="attr">background-color</span>: <span class="val">#ff007f</span>; }',
+                explicacion: "¡Tu nave ya no es invisible! Con CSS le pintamos la carrocería de un fucsia neón brutal. El diseño aerodinámico te da más velocidad.",
+                posicionNave: "30%"
+            },
+            3: {
+                rango: "Velocidad Flexbox",
+                codigo: '<span class="tag">.pista</span> { <span class="attr">display</span>: <span class="val">flex</span>; <span class="attr">justify-content</span>: <span class="val">space-between</span>; }',
+                explicacion: "¡Rompiendo la resistencia del aire! Usas <b>Flexbox</b> para alinear los propulsores perfectamente. Tu nave se acomoda de forma automática en la pista.",
+                posicionNave: "55%"
+            },
+            4: {
+                rango: "Hiperespacio Grid",
+                codigo: '<span class="tag">.turbo</span> { <span class="attr">display</span>: <span class="val">grid</span>; <span class="attr">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>; }',
+                explicacion: "¡Poder absoluto! Creas una rejilla de propulsores en 3D usando <b>CSS Grid</b>. Estás a un paso de cruzar la meta tecnológica.",
+                posicionNave: "75%"
+            },
+            5: {
+                rango: "Desarrollador Senior / Campeón",
+                codigo: '<span class="tag">@keyframes</span> <span class="attr">vuelo</span> { <span class="val">to { transform: translateX(max); }</span> }',
+                explicacion: "¡Cruzaste la meta! Agregaste animaciones avanzadas en CSS. Ahora eres un programador imparable. ¡El trofeo de la web es tuyo! 🏆",
+                posicionNave: "88%"
+            }
+        };
+
+        function acelerarNave() {
+            if (nivel < 5) {
+                nivel++;
+            } else {
+                nivel = 1; // Reinicia el circuito
+            }
+
+            const actual = carreraData[nivel];
+
+            // Mover la nave visualmente modificando el CSS mediante JS
+            document.getElementById("nave").style.left = actual.posicionNave;
+            
+            // Cambiar los textos del juego
+            document.getElementById("num-nivel").innerText = `Nivel: ${nivel} / 5`;
+            document.getElementById("nombre-rango").innerText = actual.rango;
+            document.getElementById("codigo-pantalla").innerHTML = actual.codigo;
+            document.getElementById("texto-explicacion").innerHTML = actual.explicacion;
+
+            // Cambiar el diseño del botón en la meta
+            const btn = document.getElementById("btn-accion");
+            if (nivel === 5) {
+                document.getElementById("nave").innerText = "🏎️🏆";
+                btn.innerText = "¡Dar otra vuelta al circuito! 🔄";
+                btn.style.background = "linear-gradient(135deg, var(--neon-green), #00aa00)";
+            } else {
+                document.getElementById("nave").innerText = "🏎️💨";
+                btn.innerText = "¡Inyectar Código! 🚀";
+                btn.style.background = "linear-gradient(135deg, var(--neon-cyan), #0055ff)";
+            }
+        }
+    </script>
+</body>
+</html>
